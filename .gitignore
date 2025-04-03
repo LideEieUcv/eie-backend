@@ -1,0 +1,51 @@
+# Dependencias y compilación
+/node_modules
+/dist
+/.npm
+/.nest
+/build
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+
+# Configuración de IDEs y editores
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+
+# Testing
+/coverage
+/.nyc_output
+
+# Misceláneos
+*.log
+logs
+*.pid
+*.seed
+*.pid.lock
+
+# System Files
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Archivos de paquetes de editores
+*.tsbuildinfo
