@@ -1,3 +1,14 @@
 export declare class AppService {
-    getHello(): string;
+    getNoticias(): {
+        title: string;
+        date: string;
+        content: string;
+    }[];
+    getEventos(): {
+        title: string;
+        date: number;
+        day: string;
+        month: string;
+        hour: string;
+    }[];
 }

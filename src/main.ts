@@ -4,11 +4,19 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // Habilitar CORS
+  app.enableCors({
+    origin: 'http://localhost:3001', // Puerto de tu frontend Next.js
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
+
   const config = new DocumentBuilder()
-    .setTitle('EIE Back-end')  // Título de la documentación
+    .setTitle('EIE Back-End')  // Título de la documentación
     .setDescription('Funcionalidad para el backend de la página web de la Escuela de Eléctrica de la Facultad de Ingeniería de la Universidad Central de Venezuela')  // Descripción
-    .setVersion('0.1.1')  // Versión de la API
-    .addTag('users')  // Etiquetas para agrupar endpoints
+    .setVersion('0.1.4')  // Versión de la API
+    //.addTag('Noticias y eventos')  // Etiquetas para agrupar endpoints
     .addBearerAuth()  // Si usas autenticación JWT (opcional)
     .build();
 

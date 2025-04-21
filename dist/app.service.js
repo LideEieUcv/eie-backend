@@ -9,8 +9,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
 let AppService = class AppService {
-    getHello() {
-        return 'Hello World!';
+    getNoticias() {
+        return [
+            {
+                title: "Título desde el servicio",
+                date: "2023-12-10",
+                content: "Contenido real desde el servicio"
+            },
+        ];
+    }
+    getEventos() {
+        return [
+            {
+                title: "Defensa de tesis",
+                date: 5,
+                day: "Martes",
+                month: "Diciembre",
+                hour: "2:00 pm"
+            },
+        ];
     }
 };
 exports.AppService = AppService;
