@@ -13,15 +13,14 @@ async function bootstrap() {
   });
 
   const config = new DocumentBuilder()
-    .setTitle('EIE Back-End')  // Título de la documentación
-    .setDescription('Funcionalidad para el backend de la página web de la Escuela de Eléctrica de la Facultad de Ingeniería de la Universidad Central de Venezuela')  // Descripción
-    .setVersion('0.1.4')  // Versión de la API
-    //.addTag('Noticias y eventos')  // Etiquetas para agrupar endpoints
-    .addBearerAuth()  // Si usas autenticación JWT (opcional)
+    .setTitle('EIE Back-End')
+    .setDescription('Funcionalidad para el backend de la página web de la Escuela de Eléctrica de la Facultad de Ingeniería de la Universidad Central de Venezuela')
+    .setVersion('0.2.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);  // Ruta para acceder a la UI: /api
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(3000);
 }

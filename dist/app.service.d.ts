@@ -1,9 +1,10 @@
+import { Repository } from 'typeorm';
+import { Noticia } from './noticia.entity';
 export declare class AppService {
-    getNoticias(): {
-        title: string;
-        date: string;
-        content: string;
-    }[];
+    private noticiasRepository;
+    constructor(noticiasRepository: Repository<Noticia>);
+    getNoticias(): Promise<Noticia[]>;
+    crearNoticia(noticia: Noticia): Promise<Noticia>;
     getEventos(): {
         title: string;
         date: number;

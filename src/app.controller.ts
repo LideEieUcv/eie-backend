@@ -1,15 +1,22 @@
-// src/app.controller.ts
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Noticia } from './noticia.entity';
 
-@Controller('')
+@Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {} // Inyección de dependencias
+  constructor(private readonly appService: AppService) {}
 
   @Get('noticias')
   getNoticias() {
-    return this.appService.getNoticias(); // Lógica delegada al servicio
+    return this.appService.getNoticias();
   }
+  
+  // Endpoint para crear noticias
+  @Post('noticias')
+  create(@Body() noticia: Noticia) {
+    return this.appService.crearNoticia(noticia);
+  }
+
 
   @Get('eventos')
   getEventos() {
