@@ -23,7 +23,11 @@ let AppService = class AppService {
         this.noticiasRepository = noticiasRepository;
     }
     getNoticias() {
-        return this.noticiasRepository.find();
+        return this.noticiasRepository.find({
+            order: {
+                id: 'DESC',
+            },
+        });
     }
     crearNoticia(noticia) {
         return this.noticiasRepository.save(noticia);

@@ -14,8 +14,11 @@ export class AppService {
 
   // 2. Este método ahora consulta la base de datos
   getNoticias(): Promise<Noticia[]> {
-    // find() es como hacer un "SELECT * FROM noticia"
-    return this.noticiasRepository.find();
+      return this.noticiasRepository.find({
+        order: {
+          id: 'DESC',
+        },
+      });
   }
 
   // MÉTODO PARA CREAR DATOS FÁCILMENTE
