@@ -16,6 +16,7 @@ exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
 const noticia_entity_1 = require("./noticia.entity");
+const create_evento_dto_1 = require("./create-evento.dto");
 let AppController = class AppController {
     appService;
     constructor(appService) {
@@ -29,6 +30,9 @@ let AppController = class AppController {
     }
     getEventos() {
         return this.appService.getEventos();
+    }
+    createEvento(createEventoDto) {
+        return this.appService.crearEvento(createEventoDto);
     }
 };
 exports.AppController = AppController;
@@ -51,6 +55,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "getEventos", null);
+__decorate([
+    (0, common_1.Post)('eventos'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_evento_dto_1.CreateEventoDto]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "createEvento", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [app_service_1.AppService])

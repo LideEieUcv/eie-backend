@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity() // Le dice a TypeORM que esta clase es una tabla de la BD
+@Entity()
 export class Noticia {
   @PrimaryGeneratedColumn()
   id: number;
@@ -14,7 +14,6 @@ export class Noticia {
   @Column()
   content: string;
 
-  // Añadiremos un campo para la imagen que tu componente Card necesita
   @Column({ default: 'https://ejemplo.com/imagen.jpg' })
   image: string;
 }

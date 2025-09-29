@@ -12,6 +12,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const noticia_entity_1 = require("./noticia.entity");
+const evento_entity_1 = require("./evento.entity");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -21,10 +22,10 @@ exports.AppModule = AppModule = __decorate([
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'sqlite',
                 database: 'escuela.sqlite',
-                entities: [noticia_entity_1.Noticia],
+                entities: [noticia_entity_1.Noticia, evento_entity_1.Evento],
                 synchronize: true,
             }),
-            typeorm_1.TypeOrmModule.forFeature([noticia_entity_1.Noticia]),
+            typeorm_1.TypeOrmModule.forFeature([noticia_entity_1.Noticia, evento_entity_1.Evento]),
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

@@ -2,47 +2,56 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Noticia } from './noticia.entity';
+import { Evento } from './evento.entity';
+import { CreateEventoDto } from './create-evento.dto';
 
 @Injectable()
 export class AppService {
-  // 1. Inyectamos el "repositorio" de Noticia.
-  // Piensa en esto como un objeto con superpoderes para acceder a la tabla 'noticia'.
   constructor(
     @InjectRepository(Noticia)
     private noticiasRepository: Repository<Noticia>,
+    @InjectRepository(Evento)
+    private eventoRepository: Repository<Evento>,
   ) {}
 
-  // 2. Este método ahora consulta la base de datos
   getNoticias(): Promise<Noticia[]> {
       return this.noticiasRepository.find({
         order: {
           id: 'DESC',
         },
+        take: 3,
       });
   }
 
-  // MÉTODO PARA CREAR DATOS FÁCILMENTE
   crearNoticia(noticia: Noticia) {
     return this.noticiasRepository.save(noticia);
   }
 
-  // Mantenemos este por ahora, lo conectaremos a la BD más tarde
-  getEventos() {
-    return [
-      {
-        title: 'Defensa de tesis',
-        date: 5,
-        day: 'Martes',
-        month: 'Enero',
-        hour: '11:00 am',
-      },
-      {
-        title: 'Defensa de tesis',
-        date: 5,
-        day: 'Martes',
-        month: 'Enero',
-        hour: '1:00 pm',
-      },
-    ];
+  async getEventos() {
+      const eventos = await this.eventoRepository.find({
+        order: {
+          id: 'DESC',
+        },
+        take: 3,
+      });
+
+      return eventos.map(evento => {
+        const fecha = new Date(evento.eventDate);
+
+        return {
+          id: evento.id,
+          title: evento.title,
+          content: evento.content,
+          date: fecha.getDate(),
+          day: fecha.toLocaleDateString('es-ES', { weekday: 'long' }),
+          month: fecha.toLocaleDateString('es-ES', { month: 'long' }),
+          hour: fecha.toLocaleTimeString('es-ES', { hour: 'numeric', minute: '2-digit', hour12: true }),
+        };
+      });
+    }
+
+  async crearEvento(createEventoDto:CreateEventoDto): Promise<Evento> {
+    const nuevoEvento = this.eventoRepository.create(createEventoDto);
+    return this.eventoRepository.save(nuevoEvento);
   }
 }
