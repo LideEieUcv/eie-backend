@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Noticia } from './entities/noticia.entity';
@@ -24,11 +24,17 @@ export class NoticiasService {
     });
   }
 
-  findOne(id: number) {
-    return this.noticiasRepository.findOneBy({ id });
-  }
-
   create(noticia: Noticia) {
     return this.noticiasRepository.save(noticia);
   }
+
+  async findOne(id: number): Promise<Noticia> {
+        const noticia = await this.noticiasRepository.findOneBy({ id });
+        
+        if (!noticia) {
+            throw new NotFoundException(`La noticia con el ID #${id} no fue encontrada.`);
+        }
+        
+        return noticia;
+    }
 }

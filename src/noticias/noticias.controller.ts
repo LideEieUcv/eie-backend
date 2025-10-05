@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, ParseIntPipe } from '@nestjs/common';
 import { NoticiasService } from './noticias.service';
 import { Noticia } from './entities/noticia.entity';
 
@@ -10,14 +10,14 @@ export class NoticiasController {
   findAll() {
     return this.noticiasService.findAll();
   }
-  
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.noticiasService.findOne(+id);
-  }
 
   @Post()
   create(@Body() noticia: Noticia) {
     return this.noticiasService.create(noticia);
   }
+
+  @Get(':id')
+    findOne(@Param('id', ParseIntPipe) id: number) {
+        return this.noticiasService.findOne(id);
+    }
 }
