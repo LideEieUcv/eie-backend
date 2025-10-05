@@ -9,23 +9,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const config_1 = require("@nestjs/config");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
-const noticia_entity_1 = require("./noticia.entity");
-const evento_entity_1 = require("./evento.entity");
+const noticias_module_1 = require("./noticias/noticias.module");
+const eventos_module_1 = require("./eventos/eventos.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            config_1.ConfigModule.forRoot({ isGlobal: true }),
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'sqlite',
                 database: 'escuela.sqlite',
-                entities: [noticia_entity_1.Noticia, evento_entity_1.Evento],
+                autoLoadEntities: true,
                 synchronize: true,
             }),
-            typeorm_1.TypeOrmModule.forFeature([noticia_entity_1.Noticia, evento_entity_1.Evento]),
+            noticias_module_1.NoticiasModule,
+            eventos_module_1.EventosModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
