@@ -14,6 +14,7 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const noticias_module_1 = require("./noticias/noticias.module");
 const eventos_module_1 = require("./eventos/eventos.module");
+const personas_module_1 = require("./personas/personas.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -29,6 +30,7 @@ exports.AppModule = AppModule = __decorate([
             }),
             noticias_module_1.NoticiasModule,
             eventos_module_1.EventosModule,
+            personas_module_1.PersonasModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
