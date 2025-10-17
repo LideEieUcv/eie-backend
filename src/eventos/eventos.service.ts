@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Evento } from './entities/evento.entity';
 import { CreateEventoDto } from './dtos/create-evento.dto';
+import { NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class EventosService {
@@ -51,4 +52,15 @@ export class EventosService {
       };
     });
   }
+
+  async findOne(id: number): Promise<Evento> {
+      const evento = await this.eventoRepository.findOneBy({ id });
+      
+      if (!evento) {
+          throw new NotFoundException(`El evento con el ID #${id} no fue encontrado.`);
+      }
+      
+      return evento;
+  }
+
 }
