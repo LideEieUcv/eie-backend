@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { NoticiasModule } from './noticias/noticias.module';
 import { EventosModule } from './eventos/eventos.module';
+import { PersonasModule } from './personas/personas.module';
 
 // --- NOTA: Es buena práctica no importar las entidades aquí, sino en sus módulos ---
 
@@ -21,6 +22,7 @@ import { EventosModule } from './eventos/eventos.module';
 
     NoticiasModule,
     EventosModule,
+    PersonasModule,
     // (Cuando crees PersonasModule, lo añadirás aquí)
   ],
   controllers: [AppController],
