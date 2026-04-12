@@ -19,6 +19,11 @@ export class EventosController {
     return this.eventosService.create(createEventoDto);
   }
 
+  @Get('reciente')
+  findRecent() {
+    return this.eventosService.findRecent();
+  }
+
   // Endpoint para obtener un evento por ID: GET /eventos/:id
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {

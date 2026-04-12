@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, MoreThanOrEqual } from 'typeorm';
 import { Evento } from './entities/evento.entity';
 import { CreateEventoDto } from './dtos/create-evento.dto';
 import { NotFoundException } from '@nestjs/common';
@@ -11,6 +11,24 @@ export class EventosService {
     @InjectRepository(Evento)
     private readonly eventoRepository: Repository<Evento>,
   ) {}
+
+  async findRecent(): Promise<Evento[]> {
+    // Calculamos la fecha actual menos 15 días
+    const quinceDiasAtras = new Date();
+    quinceDiasAtras.setDate(quinceDiasAtras.getDate() - 15);
+
+    return await this.eventoRepository.find({
+      where: {
+        // Filtra eventos creados en los últimos 15 días
+        // Cambia 'createdAt' por el nombre de tu columna de fecha (ej. 'fecha')
+        eventDate: MoreThanOrEqual(quinceDiasAtras),
+      },
+      order: {
+        eventDate: 'DESC', // Los más nuevos primero
+      },
+      take: 3, // Máximo 3 resultados
+    });
+  }
 
   async findLatest() {
     const eventos = await this.eventoRepository.find({

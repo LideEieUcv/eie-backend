@@ -10,6 +10,15 @@ export class NoticiasService {
     private noticiasRepository: Repository<Noticia>,
   ) {}
 
+  async findRecent(): Promise<Noticia[]> {
+    return await this.noticiasRepository.find({
+      order: {
+        id: 'DESC', // Ordenamos del más nuevo al más viejo
+      },
+      take: 3, // Limitamos el resultado a 3 registros
+    });
+  }
+
   findAll() {
     return this.noticiasRepository.find({
       order: { id: 'DESC' },

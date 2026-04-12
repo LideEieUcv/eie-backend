@@ -23,6 +23,11 @@ export class NoticiasController {
     return this.noticiasService.create(noticia);
   }
 
+  @Get('reciente')
+  findRecent() {
+    return this.noticiasService.findRecent();
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.noticiasService.findOne(id);
